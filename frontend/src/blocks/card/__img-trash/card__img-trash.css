@@ -1,0 +1,12 @@
+.card__img-trash {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.card__img-trash:hover {
+  opacity: .6;
+}

@@ -1,0 +1,18 @@
+.header__link {
+  display: block;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font: normal 18px/22px 'Inter', Arial, sans-serif;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+@media (max-width: 640px) {
+  .header__link {
+    color: #a9a9a9;
+    margin: 0 auto;
+  }
+}

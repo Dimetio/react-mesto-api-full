@@ -1,0 +1,23 @@
+.profile-info__name {
+  color: #fff;
+  font: normal 500 42px/48px 'Inter', 'Arial', sans-serif;
+  margin: 0 0 16px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;  
+}
+
+@media (max-width: 640px) {
+  .profile-info__name {
+    max-width: 282px;
+    font: normal 500 27px/33px 'Inter', 'Arial', sans-serif;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .profile-info__name {
+    max-width: 220px;
+  }
+}

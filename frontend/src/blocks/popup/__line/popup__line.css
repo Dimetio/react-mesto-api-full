@@ -1,0 +1,6 @@
+.popup__line {
+  max-width: 358px;
+  width: 100%;
+  opacity: .2;
+  margin: 0 auto;
+}

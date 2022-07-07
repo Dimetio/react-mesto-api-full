@@ -1,0 +1,7 @@
+.card__content-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 246px;
+  margin: 0 auto 31px; 
+}

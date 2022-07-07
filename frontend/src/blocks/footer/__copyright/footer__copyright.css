@@ -1,0 +1,11 @@
+.footer__copyright {
+  font: normal 400 18px/22px 'Inter', 'Arial', sans-serif;
+  color: #545454;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .footer__copyright {
+    font: normal 400 14px/17px 'Inter', 'Arial', sans-serif;
+  }
+}
