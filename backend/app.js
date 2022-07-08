@@ -11,17 +11,20 @@ const { regular } = require('./utils/regular');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 
-const allowedCors = [
-  'http://localhost:3000',
-  'http://ddubinin.students.nomoredomains.sbs',
-  'https://ddubinin.students.nomoredomains.sbs',
-];
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'http://ddubinin.students.nomoredomains.sbs',
+    'https://ddubinin.students.nomoredomains.sbs',
+  ],
+  credentials: true,
+};
 
-app.use('*', cors(allowedCors));
+app.use('*', cors(options));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
