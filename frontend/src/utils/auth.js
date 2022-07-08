@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.ddubinin.students.nomoredomains.xyz";
+export const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
 
 const checkResponce = (res) => {
   if(res.ok) {
