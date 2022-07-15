@@ -41,8 +41,8 @@ function App() {
         .then(res => {
           if(res) {
             const userData = {
-              id: res.data._id,
-              email: res.data.email,
+              id: res._id,
+              email: res.email,
             };
             setLoggedIn(true);
             setUserData(userData);
