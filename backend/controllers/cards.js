@@ -5,7 +5,7 @@ const BadRequestError = require('../errors/BadRequestError');
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch((next));
 };
 
@@ -14,7 +14,7 @@ const createCard = (req, res, next) => {
   const owner = req.user._id;
 
   Card.create({ name, link, owner })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Данные не прошли валидацию'));
@@ -37,7 +37,7 @@ const deleteCard = (req, res, next) => {
       }
 
       Card.findByIdAndRemove(req.params.cardId)
-        .then(() => res.send({ data: card }))
+        .then(() => res.send(card))
         .catch(next);
     })
     .catch(next);
@@ -51,7 +51,7 @@ const addLike = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };
@@ -64,7 +64,7 @@ const removeLike = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };
