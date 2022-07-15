@@ -6,6 +6,8 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send({ data: users }))
@@ -123,13 +125,24 @@ const login = (req, res, next) => {
 
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'secret-key', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key', { expiresIn: '7d' });
       res.send({ token });
     })
+    // const token = jwt.sign(
+    //   { _id: user._id },
+    //   NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
+    //   { expiresIn: '7d' },
+    // );
+    // res.send({ message: 'Вы вошли успешно' });
     .catch(() => {
       next(new UnauthorizedError('Неправильные почта или пароль'));
     });
 };
+
+// const logout = (req, res) => {
+//   res.clearCookie('jwt')
+//     .send({ message: 'Кука удалена' });
+// };
 
 module.exports = {
   getUsers,

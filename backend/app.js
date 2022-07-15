@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const auth = require('./middlewares/auth');
@@ -11,7 +13,7 @@ const { regular } = require('./utils/regular');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3001, DB_CONNECT } = process.env;
 
 const app = express();
 
@@ -25,11 +27,11 @@ const options = {
 };
 
 app.use('*', cors(options));
-
+// app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/mestodb');
+mongoose.connect(DB_CONNECT);
 
 app.use(requestLogger); // логгер запросов до роутов
 
