@@ -16,7 +16,7 @@ class Api {
 
   getCards() {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers
+      headers: {...this.headers}
     })
       .then(this._getResponseData)
   }
@@ -24,7 +24,7 @@ class Api {
   setUserInfo(item) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {...this.headers},
       body: JSON.stringify({
         name: item.name,
         about: item.about
@@ -35,7 +35,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers
+      headers: {...this.headers}
     })
       .then(this._getResponseData)
   }
@@ -43,7 +43,7 @@ class Api {
   createCard(card) {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
-      headers: this.headers,
+      headers: {...this.headers},
       body: JSON.stringify({
         name: card.title,
         link: card.link
@@ -55,7 +55,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: {...this.headers},
     })
       .then(this._getResponseData)
   }
@@ -63,7 +63,7 @@ class Api {
   likeCard(id) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       method: 'PUT',
-      headers: this.headers,
+      headers: {...this.headers},
     })
       .then(this._getResponseData)
   }
@@ -71,7 +71,7 @@ class Api {
   dislikeCard(id) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: {...this.headers},
     })
       .then(this._getResponseData)
   }
@@ -82,24 +82,24 @@ class Api {
     } else {
       return this.dislikeCard(id)
     }
-    //isLiked ? this.likeCard(id) : this.dislikeCard(id);
-    // не пойму почему выдает ошибку, когда тернарка
   }
 
   setAvatar(avatar) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {...this.headers},
       body: JSON.stringify(avatar),
     })
       .then(this._getResponseData)
   }
 }
 
+const token = localStorage.getItem('jwt');
+
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-39",
+  baseUrl: "//localhost:3001",
   headers: {
-    authorization: "006bb176-a176-4c97-bbc5-cf71d72d94bc",
+    'Authorization': `Bearer ${token}`,
     "content-type": "application/json",
   }
 });
