@@ -41,6 +41,7 @@
 @import url(./blocks/header/__burger/header__burger.css);
 
 /* profile */
+@import url(./blocks/main/main.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__add/profile__add.css);
 @import url(./blocks/profile-info/profile-info.css);
