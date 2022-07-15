@@ -97,7 +97,7 @@ class Api {
 const token = localStorage.getItem('jwt');
 
 const api = new Api({
-  baseUrl: 'https://api.ddubinin.students.nomoredomains.xyz/',
+  baseUrl: `${window.location.protocol}//api.ddubinin.students.nomoredomains.xyz`,
   headers: {
     'Authorization': `Bearer ${token}`,
     "content-type": "application/json",

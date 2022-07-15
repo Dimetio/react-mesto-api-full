@@ -1,4 +1,4 @@
-export const BASE_URL = `https://api.ddubinin.students.nomoredomains.xyz/`;
+export const BASE_URL = `${window.location.protocol}//api.ddubinin.students.nomoredomains.xyz`;
 
 const checkResponce = (res) => {
   if(res.ok) {
