@@ -5,21 +5,22 @@ import iTrash from '../images/trash.svg';
 
 export default function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
   const cardDeleteButtonClassName = (
     `card__img-trash ${isOwn ? 'card__img-trash-visible' : ''}`
   );
 
   const [islike, setIsLike] = useState(
-    card.likes.some(i => i._id === currentUser._id)
+    card.likes.some(like => like === currentUser._id)
   );
+
   function handleCardClick() {
     onCardClick(card);
   }
 
   function handleLikeClick() {
     setIsLike(!islike);
-    onCardLike(card)
+    onCardLike(card);
   }
 
   function handleDeleteClick() {
