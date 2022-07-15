@@ -152,7 +152,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(like => like === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -162,7 +162,6 @@ function App() {
   }
 
   function handleCardDelete() {
-    console.log(cardToRemove)
     api.deleteCard(cardToRemove._id)
       .then(() => {
         setCards(cards.filter((el) => (el._id !== cardToRemove._id)))
