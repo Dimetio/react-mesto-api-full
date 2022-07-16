@@ -128,21 +128,10 @@ const login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key', { expiresIn: '7d' });
       res.send({ token });
     })
-    // const token = jwt.sign(
-    //   { _id: user._id },
-    //   NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
-    //   { expiresIn: '7d' },
-    // );
-    // res.send({ message: 'Вы вошли успешно' });
     .catch(() => {
       next(new UnauthorizedError('Неправильные почта или пароль'));
     });
 };
-
-// const logout = (req, res) => {
-//   res.clearCookie('jwt')
-//     .send({ message: 'Кука удалена' });
-// };
 
 module.exports = {
   getUsers,

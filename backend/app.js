@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const auth = require('./middlewares/auth');
@@ -27,7 +26,6 @@ const options = {
 };
 
 app.use('*', cors(options));
-// app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -61,7 +59,7 @@ app.post('/signin', celebrate({
 app.use('/users', auth, userRoutes);
 app.use('/cards', auth, cardRoutes);
 
-app.use(errorLogger); // логгер ошивок до ошибок
+app.use(errorLogger);
 
 app.all('*', (req, res, next) => {
   next(new NotFoundError('Неправильный путь. Error 404'));
