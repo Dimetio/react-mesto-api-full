@@ -33,7 +33,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(DB_CONNECT);
 
-app.use(requestLogger); // логгер запросов до роутов
+app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
