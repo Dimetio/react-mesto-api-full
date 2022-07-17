@@ -1,4 +1,5 @@
-export const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
+//export const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
+export const BASE_URL = '//localhost:3001';
 
 const checkResponce = (res) => {
   if(res.ok) {
@@ -17,7 +18,7 @@ export const register = (email, password) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ password: password, email: email }),
+    body: JSON.stringify({ password, email }),
   })
   .then(checkResponce);
 }
@@ -28,7 +29,7 @@ export const login = (email, password) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ password: password, email: email }),
+    body: JSON.stringify({ password, email }),
   })
   .then(checkResponce);
 }

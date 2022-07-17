@@ -71,8 +71,8 @@ function App() {
     return auth.login(email, password)
       .then(data => {
         setLoggedIn(true);
-        if(data['token']) {
-          localStorage.setItem('jwt', data['token']);
+        if(data.token) {
+          localStorage.setItem('jwt', data.token);
           tokenCheck();
         }
       })
@@ -174,7 +174,7 @@ function App() {
     if(loggedIn) {
       navigate('/');
     }
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
 
   useEffect(() => {
     tokenCheck();

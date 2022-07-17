@@ -97,7 +97,8 @@ class Api {
 const token = localStorage.getItem('jwt');
 
 const api = new Api({
-  baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`,
+  // baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`,
+  baseUrl: '//localhost:3001',
   headers: {
     'Authorization': `Bearer ${token}`,
     "content-type": "application/json",
