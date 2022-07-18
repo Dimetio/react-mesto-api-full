@@ -14,9 +14,13 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  _headersWithJwt() {
+    return {authorization: `Bearer ${localStorage.getItem('jwt')}`, ...this.headers}
+  }
+
   getCards() {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: {...this.headers}
+      headers: this._headersWithJwt(),
     })
       .then(this._getResponseData)
   }
@@ -24,7 +28,7 @@ class Api {
   setUserInfo(item) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: {...this.headers},
+       headers: this._headersWithJwt(),
       body: JSON.stringify({
         name: item.name,
         about: item.about
@@ -35,7 +39,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: {...this.headers}
+       headers: this._headersWithJwt(),
     })
       .then(this._getResponseData)
   }
@@ -43,7 +47,7 @@ class Api {
   createCard(card) {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
-      headers: {...this.headers},
+       headers: this._headersWithJwt(),
       body: JSON.stringify({
         name: card.title,
         link: card.link
@@ -55,7 +59,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: {...this.headers},
+       headers: this._headersWithJwt(),
     })
       .then(this._getResponseData)
   }
@@ -63,7 +67,7 @@ class Api {
   likeCard(id) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       method: 'PUT',
-      headers: {...this.headers},
+       headers: this._headersWithJwt(),
     })
       .then(this._getResponseData)
   }
@@ -71,7 +75,7 @@ class Api {
   dislikeCard(id) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       method: 'DELETE',
-      headers: {...this.headers},
+       headers: this._headersWithJwt(),
     })
       .then(this._getResponseData)
   }
@@ -87,21 +91,18 @@ class Api {
   setAvatar(avatar) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {...this.headers},
+       headers: this._headersWithJwt(),
       body: JSON.stringify(avatar),
     })
       .then(this._getResponseData)
   }
 }
 
-const token = localStorage.getItem('jwt');
-
 const api = new Api({
-  // baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`,
-  baseUrl: '//localhost:3001',
+  baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL}`,
   headers: {
-    'Authorization': `Bearer ${token}`,
-    "content-type": "application/json",
+    "Content-type": "application/json",
+    'Accept': 'application/json',
   }
 });
 
