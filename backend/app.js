@@ -12,7 +12,7 @@ const { regular } = require('./utils/regular');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3001, DB_CONNECT } = process.env;
+const { PORT = 3000, DB_CONNECT = 'mongodb://localhost:27017/mestodb' } = process.env;
 
 const app = express();
 
